@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Gra klikor</title>
+  <style>
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0%;
+      background-color: rgb(42, 42, 42);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 25px;
+      text-shadow: 1px 1px 0 black;
+      color: whitesmoke;
+      text-align: center;
+    }
+
+    .kart {
+      width: 300px;
+      height: 375px;
+      border-radius: 25px;
+      background-color: rgb(108, 143, 122);
+      box-shadow: 5px 5px 0 rgb(70, 90, 78);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .vrem {
+      width: 100%;
+      height: 40px;
+    }
+
+    .licz {
+      width: 100%;
+      height: 75px;
+    }
+
+    .but {
+      display: flex;
+      justify-content: center;
+      justify-content: space-around;
+      width: 85%;
+      height: 30px;
+    }
+
+    .wyn {
+      width: 100%;
+      height: 65px;
+    }
+
+
+    .skl {
+      width: 100%;
+      height: 35px;
+    }
+
+    .skl1 {
+      width: 100%;
+      height: 100px;
+    }
+
+    #butik {
+      width: 250px;
+    }
+
+    .buti {
+      width: 120px;
+      height: 40px;
+      border-radius: 20px;
+      border: none;
+      background-color: rgb(94, 123, 106);
+      box-shadow: 0px 5px 0 rgb(70, 90, 78);
+      font-size: 23px;
+      color: whitesmoke;
+      text-shadow: 1px 1px 0 black;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .buti:hover {
+      background-color: rgb(92, 118, 103);
+    }
+
+    .buti:active {
+      background-color: rgb(85, 110, 95);
+    }
+
+    .pasha1 {
+      font-size: 23px;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div class="kart">
+    <div class="vrem">
+      <p class="pasha" id="pasha1">
+        Czas: 10s
+      </p>
+    </div>
+    <div class="licz">
+      <p class="pasha" id="pasha2">Punkty: 0</p>
+    </div>
+    <div class="but">
+      <button onclick="plus()" class="buti" id="butip">+1</button>
+      <button onclick="minus()" class="buti" id="butim">-1</button>
+    </div>
+    <div class="wyn">
+      <p class="pasha1" id="pasha3"></p>
+    </div>
+    <div class="skl">
+      <button onclick="kli()" disabled class="buti" id="butik">Auto-klikor</button>
+    </div>
+    <div class="skl1">
+      <p class="pasha">Kup auto-klikor za 20 punktów</p>
+    </div>
+  </div>
+
+  <script>
+    let p1 = document.getElementById("pasha1");
+    let p2 = document.getElementById("pasha2");
+    let p3 = document.getElementById("pasha3");
+    let wyn = 0;
+    let vrem = 10;
+    let figli = null;
+
+    function plus() {
+      wyn++;
+      p2.innerHTML = "Punkty: " + wyn;
+
+      if (wyn == 50) {
+        p3.innerHTML = "Wow, otrzymałeś 50 punktów";
+      } else if (wyn == 20) {
+        document.getElementById("butik").disabled = false;
+      } else if (wyn == 10) {
+        p3.innerHTML = "Brawo, masz 10 punktów";
+      }
+
+      let r = Math.floor(Math.random() * 255);
+      let g = Math.floor(Math.random() * 255);
+      let b = Math.floor(Math.random() * 255);
+
+      document.getElementById("butip").style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function kli() {
+      wyn = wyn - 20;
+      p2.innerHTML = "Punkty: " + wyn;
+
+      figli = setInterval(() => {
+        wyn++;
+        p2.innerHTML = "Punkty: " + wyn;
+      }, 1000);
+    }
+
+    function minus() {
+      wyn--;
+      p2.innerHTML = "Punkty: " + wyn;
+
+      let r = Math.floor(Math.random() * 255);
+      let g = Math.floor(Math.random() * 255);
+      let b = Math.floor(Math.random() * 255);
+
+      document.getElementById("butim").style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function vremi() {
+      vrem--;
+      p1.innerHTML = "Czas: " + vrem + "s";
+
+      if (vrem == 0) {
+        p1.innerHTML = "Koniec czasu";
+        p3.innerHTML = "Twój wynik: " + wyn;
+        document.getElementById("butip").disabled = true;
+        document.getElementById("butim").disabled = true;
+        document.getElementById("butik").disabled = true;
+        clearInterval(vremint);
+        clearInterval(figli);
+      }
+    }
+
+    let vremint = setInterval(vremi, 1000);
+  </script>
+</body>
+
+</html>
