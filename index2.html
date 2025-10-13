@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Gra klikor</title>
+
+  <style>
+    body,
+    html {
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      padding: 0%;
+      background-color: rgb(42, 42, 42);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 25px;
+      text-shadow: 1px 1px 0 black;
+      color: whitesmoke;
+      text-align: center;
+    }
+
+    .kart {
+      width: auto;
+      height: auto;
+      border-radius: 25px;
+      background-color: rgb(108, 143, 122);
+      box-shadow: 5px 5px 0 rgb(70, 90, 78);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 15px 0;
+    }
+
+    #kart1 {
+      padding: 15px 15px 15px 15px;
+    }
+
+    #kart2 {
+      padding: 0px 30px 30px 30px;
+    }
+
+    #kart3 {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgb(108, 143, 122);
+      border: 1px solid rgb(70, 90, 78);
+      color: whitesmoke;
+      padding: 10px;
+      transform: translate(-100vw);
+      transition: transform 0.5s ease-in;
+    }
+
+    #kart4 {
+      padding: 10px 20px 10px 20px;
+      border-radius: 50%;
+      font-size: 30px;
+    }
+
+    .wopros {
+      position: relative;
+      display: inline-block;
+    }
+
+    .wopros:hover #kart3 {
+      transform: translate(-15vw)
+    }
+
+    .vrem {
+      width: 100%;
+      height: 40px;
+    }
+
+    .licz {
+      width: 100%;
+      height: 75px;
+    }
+
+    .but {
+      display: flex;
+      justify-content: center;
+      justify-content: space-around;
+      width: 100%;
+      height: 30px;
+    }
+
+    .wyn {
+      width: 100%;
+      height: 65px;
+    }
+
+
+    .skl {
+      width: 100%;
+      height: 35px;
+    }
+
+    .skl1 {
+      width: 100%;
+      height: 100px;
+    }
+
+    #butik {
+      width: 250px;
+    }
+
+    .buti {
+      width: 120px;
+      height: 40px;
+      border-radius: 20px;
+      border: none;
+      background-color: rgb(94, 123, 106);
+      box-shadow: 0px 5px 0 rgb(70, 90, 78);
+      font-size: 23px;
+      color: whitesmoke;
+      text-shadow: 1px 1px 0 black;
+      font-family: 'Times New Roman', Times, serif;
+
+      &:hover {
+        background-color: rgb(92, 118, 103);
+      }
+
+      &:active {
+        background-color: rgb(85, 110, 95);
+      }
+    }
+
+
+
+
+    .pasha1 {
+      font-size: 23px;
+    }
+
+    .nicki {
+      width: 200px;
+      height: 40px;
+      border-radius: 20px;
+      border: none;
+      background-color: rgb(70, 90, 78);
+      font-size: 23px;
+      color: whitesmoke;
+      text-shadow: 1px 1px 0 black;
+      font-family: 'Times New Roman', Times, serif;
+      margin-bottom: 10px;
+
+      &::placeholder {
+        color: rgb(206, 206, 206);
+      }
+    }
+
+    .tabli {
+      width: auto;
+      height: auto;
+      border-radius: 20px;
+      font-size: 23px;
+      color: whitesmoke;
+      text-shadow: 1px 1px 0 black;
+      font-family: 'Times New Roman', Times, serif;
+      border-spacing: 0;
+    }
+
+    th,
+    tr,
+    td {
+      border: 1px solid rgb(70, 90, 78);
+      font-size: 23px;
+      color: whitesmoke;
+      text-shadow: 1px 1px 0 black;
+      padding: 5px 5px;
+    }
+
+    #butie {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="kart" id="kart1">
+    <input type="text" class="nicki" id="nicki" placeholder="Podaj nick:" max="10">
+    <button onclick="wyp()" class="buti" id="butiw">Start</button>
+  </div>
+
+  <div class="kart" id="kart2">
+    <div class="vrem">
+      <p class="pasha" id="pasha1">
+        Czas: 10s
+      </p>
+    </div>
+    <div class="licz">
+      <p class="pasha" id="pasha2">Punkty: 0</p>
+    </div>
+    <div class="but">
+      <button onclick="plus()" disabled class="buti" id="butip">+1</button>
+      <button onclick="minus()" disabled class="buti" id="butim">-1</button>
+    </div>
+    <div class="wyn">
+      <p class="pasha1" id="pasha3"></p>
+    </div>
+    <div class="skl">
+      <button onclick="kli()" disabled class="buti" id="butik">Auto-klikor</button>
+    </div>
+    <div class="skl1">
+      <p class="pasha">Kup auto-klikor za 20 <br> punktów</p>
+    </div>
+    <button onclick="ret()" disabled class="buti" id="butit">Reset</button>
+  </div>
+
+  <div class="wopros">
+    <div class="kart" id="kart4">?</div>
+    <div class="kart" id="kart3">
+      <table class="tabli">
+        <tr>
+          <th>Numer gracza:</th>
+          <th>Nick:</th>
+          <th>Wynik</th>
+          <th>Autokliki</th>
+          <th>Autoklikacze</th>
+        </tr>
+        <tbody id="tablik"></tbody>
+      </table>
+      <button onclick="exp()" class="buti" id="butie">Export</button>
+    </div>
+  </div>
+
+  <script>
+    let p1 = document.getElementById("pasha1");
+    let p2 = document.getElementById("pasha2");
+    let p3 = document.getElementById("pasha3");
+    let ini = document.getElementById("nicki");
+    let wyn = 0;
+    let vrem = 10;
+    let vremint = null;
+    let ilklik = 0;
+    let autklik = 0;
+    let autkliki = [];
+
+    function wyp() {
+      clearInterval(vremint);
+      autkliki.forEach(clearInterval);
+      autkliki = [];
+
+      wyn = 0;
+      vrem = 10;
+      ilklik = 0;
+      autklik = 0;
+
+      p1.innerHTML = "Czas: " + vrem + "s";
+      p2.innerHTML = "Punkty: " + wyn;
+      p3.innerHTML = "";
+
+      document.getElementById("butip").disabled = false;
+      document.getElementById("butim").disabled = false;
+      document.getElementById("butik").disabled = true;
+      document.getElementById("butit").disabled = true;
+      document.getElementById("butiw").disabled = true;
+
+      vremint = setInterval(vremi, 1000);
+    }
+
+    function plus() {
+      wyn++;
+      p2.innerHTML = "Punkty: " + wyn;
+
+      if (wyn == 50) {
+        p3.innerHTML = "Wow, otrzymałeś 50 punktów";
+      } else if (wyn == 20) {
+        document.getElementById("butik").disabled = false;
+      } else if (wyn == 10) {
+        p3.innerHTML = "Brawo, masz 10 punktów";
+      }
+
+      let r = Math.floor(Math.random() * 255);
+      let g = Math.floor(Math.random() * 255);
+      let b = Math.floor(Math.random() * 255);
+
+      document.getElementById("butip").style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function kli() {
+      wyn = wyn - 20;
+      p2.innerHTML = "Punkty: " + wyn;
+      autklik++;
+
+      let setautkliki = setInterval(() => {
+        wyn++;
+        ilklik++;
+        p2.innerHTML = "Punkty: " + wyn;
+      }, 1000);
+
+      autkliki.push(setautkliki);
+    }
+
+    function minus() {
+      wyn--;
+      p2.innerHTML = "Punkty: " + wyn;
+
+      let r = Math.floor(Math.random() * 255);
+      let g = Math.floor(Math.random() * 255);
+      let b = Math.floor(Math.random() * 255);
+
+      document.getElementById("butim").style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function vremi() {
+      vrem--;
+      p1.innerHTML = "Czas: " + vrem + "s";
+
+      if (vrem == 0) {
+        p1.innerHTML = "Koniec czasu";
+        p3.innerHTML = "Twój wynik: " + wyn;
+
+        document.getElementById("butip").disabled = true;
+        document.getElementById("butim").disabled = true;
+        document.getElementById("butik").disabled = true;
+        document.getElementById("butit").disabled = false;
+        document.getElementById("butiw").disabled = false;
+
+        clearInterval(vremint);
+        autkliki.forEach(clearInterval)
+
+        let numer = tablic.length + 1;
+        let nick = ini.value || "Anonim";
+        let wynik = wyn;
+        let autokliki = ilklik;
+        let autoklikacze = autklik;
+
+        tablic.push({
+          numer: numer,
+          nick: nick,
+          wynik: wynik,
+          autokliki: autokliki,
+          autoklikacze: autoklikacze
+        });
+
+        tabili(tablic);
+      }
+    }
+
+    function ret() {
+      wyp();
+    }
+
+    let tablic = [];
+
+    function tabili(t) {
+      let tabli = document.getElementById("tablik");
+      let chasti = "";
+      t.sort((a, b) => b.wynik - a.wynik);
+
+      for (let i = 0; i < t.length; i++) {
+        let chast = `<tr>
+                        <td>${t[i].numer}</td>
+                        <td>${t[i].nick}</td>
+                        <td>${t[i].wynik}</td>
+                        <td>${t[i].autokliki}</td>
+                        <td>${t[i].autoklikacze}</td>
+                    </tr>`
+        chasti += chast;
+      }
+      tabli.innerHTML = chasti; 2
+    }
+
+    function exp() {
+      if (tablic.length === 0) {
+        alert("Brak danych do eksportu.");
+        return;
+      }
+
+      let csv = `"Numer gracza","Nick","Wynik","Autokliki","Autoklikacze"\n`;
+
+      tablic.forEach(row => {
+        csv += `"${row.numer}","${row.nick}","${row.wynik}","${row.autokliki}","${row.autoklikacze}"\n`;
+      });
+
+      csv += "\n";
+
+      let bloobi = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+
+      let lini = document.createElement("a");
+      let urli = URL.createObjectURL(bloobi);
+      lini.setAttribute("href", urli);
+      lini.setAttribute("download", "Ranking.csv");
+      lini.style.display = "none";
+      document.body.appendChild(lini);
+      lini.click();
+
+      document.body.removeChild(lini);
+      URL.revokeObjectURL(urli);
+    }
+  </script>
+
+</body>
+
+</html>
